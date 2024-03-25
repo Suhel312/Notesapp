@@ -1,7 +1,9 @@
 package com.suhel.notesapp.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AlphaAnimation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -39,6 +41,7 @@ class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
         val currentNote=differ.currentList[position]
+        setAnimation(holder.itemView)
 
         holder.itemBinding.noteTitle.text=currentNote.noteTitle
         holder.itemBinding.noteDesc.text=currentNote.noteDesc
@@ -48,6 +51,12 @@ class NoteAdapter: RecyclerView.Adapter<NoteAdapter.NoteViewHolder>() {
             it.findNavController().navigate(direction)
 
         }
+    }
+
+    fun setAnimation(view: View){
+        val anim= AlphaAnimation(0.0f,1.0f)
+        anim.duration=1000
+        view.startAnimation(anim)
     }
 
 }
